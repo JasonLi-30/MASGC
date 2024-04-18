@@ -1,0 +1,1057 @@
+2022-10-14 16:30:43,719 - mmpose - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.13 (default, Mar 29 2022, 02:18:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0,1,2,3,4,5,6,7: NVIDIA GeForce RTX 3090
+CUDA_HOME: /usr/local/cuda
+NVCC: Cuda compilation tools, release 11.6, V11.6.124
+GCC: gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+PyTorch: 1.10.0+cu113
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) Math Kernel Library Version 2020.0.0 Product Build 20191122 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v2.2.3 (Git Hash 7336ca9f055cf1bfa13efb658fe15dc9b41f0740)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 11.3
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86
+  - CuDNN 8.2
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.3, CUDNN_VERSION=8.2.0, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DEDGE_PROFILER_USE_KINETO -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.10.0, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+TorchVision: 0.11.1+cu102
+OpenCV: 4.5.5
+MMCV: 1.5.0
+MMCV Compiler: GCC 7.5
+MMCV CUDA Compiler: 11.6
+MMPose: 0.26.0+04e57f8
+------------------------------------------------------------
+
+2022-10-14 16:30:43,720 - mmpose - INFO - Distributed training: False
+2022-10-14 16:31:01,687 - mmpose - INFO - Config:
+checkpoint_config = dict(interval=10)
+log_config = dict(
+    interval=20,
+    hooks=[dict(type='TextLoggerHook'),
+           dict(type='TensorboardLoggerHook')])
+log_level = 'INFO'
+load_from = None
+resume_from = None
+dist_params = dict(backend='nccl')
+workflow = [('train', 1)]
+opencv_num_threads = 0
+mp_start_method = 'fork'
+dataset_info = dict(
+    dataset_name='h36m',
+    paper_info=dict(
+        author=
+        'Ionescu, Catalin and Papava, Dragos and Olaru, Vlad and Sminchisescu, Cristian',
+        title=
+        'Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments',
+        container=
+        'IEEE Transactions on Pattern Analysis and Machine Intelligence',
+        year='2014',
+        homepage='http://vision.imar.ro/human3.6m/description.php'),
+    keypoint_info=dict({
+        0:
+        dict(name='root', id=0, color=[51, 153, 255], type='lower', swap=''),
+        1:
+        dict(
+            name='right_hip',
+            id=1,
+            color=[255, 128, 0],
+            type='lower',
+            swap='left_hip'),
+        2:
+        dict(
+            name='right_knee',
+            id=2,
+            color=[255, 128, 0],
+            type='lower',
+            swap='left_knee'),
+        3:
+        dict(
+            name='right_foot',
+            id=3,
+            color=[255, 128, 0],
+            type='lower',
+            swap='left_foot'),
+        4:
+        dict(
+            name='left_hip',
+            id=4,
+            color=[0, 255, 0],
+            type='lower',
+            swap='right_hip'),
+        5:
+        dict(
+            name='left_knee',
+            id=5,
+            color=[0, 255, 0],
+            type='lower',
+            swap='right_knee'),
+        6:
+        dict(
+            name='left_foot',
+            id=6,
+            color=[0, 255, 0],
+            type='lower',
+            swap='right_foot'),
+        7:
+        dict(name='spine', id=7, color=[51, 153, 255], type='upper', swap=''),
+        8:
+        dict(name='thorax', id=8, color=[51, 153, 255], type='upper', swap=''),
+        9:
+        dict(
+            name='neck_base',
+            id=9,
+            color=[51, 153, 255],
+            type='upper',
+            swap=''),
+        10:
+        dict(name='head', id=10, color=[51, 153, 255], type='upper', swap=''),
+        11:
+        dict(
+            name='left_shoulder',
+            id=11,
+            color=[0, 255, 0],
+            type='upper',
+            swap='right_shoulder'),
+        12:
+        dict(
+            name='left_elbow',
+            id=12,
+            color=[0, 255, 0],
+            type='upper',
+            swap='right_elbow'),
+        13:
+        dict(
+            name='left_wrist',
+            id=13,
+            color=[0, 255, 0],
+            type='upper',
+            swap='right_wrist'),
+        14:
+        dict(
+            name='right_shoulder',
+            id=14,
+            color=[255, 128, 0],
+            type='upper',
+            swap='left_shoulder'),
+        15:
+        dict(
+            name='right_elbow',
+            id=15,
+            color=[255, 128, 0],
+            type='upper',
+            swap='left_elbow'),
+        16:
+        dict(
+            name='right_wrist',
+            id=16,
+            color=[255, 128, 0],
+            type='upper',
+            swap='left_wrist')
+    }),
+    skeleton_info=dict({
+        0:
+        dict(link=('root', 'left_hip'), id=0, color=[0, 255, 0]),
+        1:
+        dict(link=('left_hip', 'left_knee'), id=1, color=[0, 255, 0]),
+        2:
+        dict(link=('left_knee', 'left_foot'), id=2, color=[0, 255, 0]),
+        3:
+        dict(link=('root', 'right_hip'), id=3, color=[255, 128, 0]),
+        4:
+        dict(link=('right_hip', 'right_knee'), id=4, color=[255, 128, 0]),
+        5:
+        dict(link=('right_knee', 'right_foot'), id=5, color=[255, 128, 0]),
+        6:
+        dict(link=('root', 'spine'), id=6, color=[51, 153, 255]),
+        7:
+        dict(link=('spine', 'thorax'), id=7, color=[51, 153, 255]),
+        8:
+        dict(link=('thorax', 'neck_base'), id=8, color=[51, 153, 255]),
+        9:
+        dict(link=('neck_base', 'head'), id=9, color=[51, 153, 255]),
+        10:
+        dict(link=('thorax', 'left_shoulder'), id=10, color=[0, 255, 0]),
+        11:
+        dict(link=('left_shoulder', 'left_elbow'), id=11, color=[0, 255, 0]),
+        12:
+        dict(link=('left_elbow', 'left_wrist'), id=12, color=[0, 255, 0]),
+        13:
+        dict(link=('thorax', 'right_shoulder'), id=13, color=[255, 128, 0]),
+        14:
+        dict(
+            link=('right_shoulder', 'right_elbow'), id=14, color=[255, 128,
+                                                                  0]),
+        15:
+        dict(link=('right_elbow', 'right_wrist'), id=15, color=[255, 128, 0])
+    }),
+    joint_weights=[
+        1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+        1.0, 1.0, 1.0
+    ],
+    sigmas=[],
+    stats_info=dict(bbox_center=(528.0, 427.0), bbox_scale=400.0))
+evaluation = dict(interval=10, metric=['mpjpe', 'p-mpjpe'], save_best='MPJPE')
+optimizer = dict(type='Adam', lr=0.001)
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(policy='exp', by_epoch=True, gamma=0.975)
+total_epochs = 160
+channel_cfg = dict(
+    num_output_channels=17,
+    dataset_joints=17,
+    dataset_channel=[[
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+    ]],
+    inference_channel=[
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+    ])
+model = dict(
+    type='PoseLifter',
+    pretrained=None,
+    backbone=dict(
+        type='TCN',
+        in_channels=34,
+        stem_channels=1024,
+        num_blocks=3,
+        kernel_sizes=(3, 3, 3, 3),
+        dropout=0.25,
+        use_stride_conv=True),
+    keypoint_head=dict(
+        type='TemporalRegressionHead',
+        in_channels=1024,
+        num_joints=17,
+        loss_keypoint=dict(type='MPJPELoss')),
+    train_cfg=dict(),
+    test_cfg=dict(restore_global_position=True))
+data_root = '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m'
+data_cfg = dict(
+    num_joints=17,
+    seq_len=81,
+    seq_frame_interval=1,
+    causal=False,
+    temporal_padding=True,
+    joint_2d_src='gt',
+    need_camera_param=True,
+    camera_param_file=
+    '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/cameras.pkl'
+)
+train_pipeline = [
+    dict(
+        type='GetRootCenteredPose',
+        item='target',
+        visible_item='target_visible',
+        root_index=0,
+        root_name='root_position',
+        remove_root=False),
+    dict(type='ImageCoordinateNormalization', item='input_2d'),
+    dict(
+        type='RelativeJointRandomFlip',
+        item=['input_2d', 'target'],
+        flip_cfg=[
+            dict(center_mode='static', center_x=0.0),
+            dict(center_mode='root', center_index=0)
+        ],
+        visible_item=['input_2d_visible', 'target_visible'],
+        flip_prob=0.5),
+    dict(type='PoseSequenceToTensor', item='input_2d'),
+    dict(
+        type='Collect',
+        keys=[('input_2d', 'input'), 'target'],
+        meta_name='metas',
+        meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+]
+val_pipeline = [
+    dict(
+        type='GetRootCenteredPose',
+        item='target',
+        visible_item='target_visible',
+        root_index=0,
+        root_name='root_position',
+        remove_root=False),
+    dict(type='ImageCoordinateNormalization', item='input_2d'),
+    dict(type='PoseSequenceToTensor', item='input_2d'),
+    dict(
+        type='Collect',
+        keys=[('input_2d', 'input'), 'target'],
+        meta_name='metas',
+        meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+]
+test_pipeline = [
+    dict(
+        type='GetRootCenteredPose',
+        item='target',
+        visible_item='target_visible',
+        root_index=0,
+        root_name='root_position',
+        remove_root=False),
+    dict(type='ImageCoordinateNormalization', item='input_2d'),
+    dict(type='PoseSequenceToTensor', item='input_2d'),
+    dict(
+        type='Collect',
+        keys=[('input_2d', 'input'), 'target'],
+        meta_name='metas',
+        meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+]
+data = dict(
+    samples_per_gpu=128,
+    workers_per_gpu=2,
+    val_dataloader=dict(samples_per_gpu=128),
+    test_dataloader=dict(samples_per_gpu=128),
+    train=dict(
+        type='Body3DH36MDataset',
+        ann_file=
+        '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/fps50/h36m_train.npz',
+        img_prefix='/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/images/',
+        data_cfg=dict(
+            num_joints=17,
+            seq_len=81,
+            seq_frame_interval=1,
+            causal=False,
+            temporal_padding=True,
+            joint_2d_src='gt',
+            need_camera_param=True,
+            camera_param_file=
+            '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/cameras.pkl'
+        ),
+        pipeline=[
+            dict(
+                type='GetRootCenteredPose',
+                item='target',
+                visible_item='target_visible',
+                root_index=0,
+                root_name='root_position',
+                remove_root=False),
+            dict(type='ImageCoordinateNormalization', item='input_2d'),
+            dict(
+                type='RelativeJointRandomFlip',
+                item=['input_2d', 'target'],
+                flip_cfg=[
+                    dict(center_mode='static', center_x=0.0),
+                    dict(center_mode='root', center_index=0)
+                ],
+                visible_item=['input_2d_visible', 'target_visible'],
+                flip_prob=0.5),
+            dict(type='PoseSequenceToTensor', item='input_2d'),
+            dict(
+                type='Collect',
+                keys=[('input_2d', 'input'), 'target'],
+                meta_name='metas',
+                meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+        ],
+        dataset_info=dict(
+            dataset_name='h36m',
+            paper_info=dict(
+                author=
+                'Ionescu, Catalin and Papava, Dragos and Olaru, Vlad and Sminchisescu, Cristian',
+                title=
+                'Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments',
+                container=
+                'IEEE Transactions on Pattern Analysis and Machine Intelligence',
+                year='2014',
+                homepage='http://vision.imar.ro/human3.6m/description.php'),
+            keypoint_info=dict({
+                0:
+                dict(
+                    name='root',
+                    id=0,
+                    color=[51, 153, 255],
+                    type='lower',
+                    swap=''),
+                1:
+                dict(
+                    name='right_hip',
+                    id=1,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_hip'),
+                2:
+                dict(
+                    name='right_knee',
+                    id=2,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_knee'),
+                3:
+                dict(
+                    name='right_foot',
+                    id=3,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_foot'),
+                4:
+                dict(
+                    name='left_hip',
+                    id=4,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_hip'),
+                5:
+                dict(
+                    name='left_knee',
+                    id=5,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_knee'),
+                6:
+                dict(
+                    name='left_foot',
+                    id=6,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_foot'),
+                7:
+                dict(
+                    name='spine',
+                    id=7,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                8:
+                dict(
+                    name='thorax',
+                    id=8,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                9:
+                dict(
+                    name='neck_base',
+                    id=9,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                10:
+                dict(
+                    name='head',
+                    id=10,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                11:
+                dict(
+                    name='left_shoulder',
+                    id=11,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_shoulder'),
+                12:
+                dict(
+                    name='left_elbow',
+                    id=12,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_elbow'),
+                13:
+                dict(
+                    name='left_wrist',
+                    id=13,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_wrist'),
+                14:
+                dict(
+                    name='right_shoulder',
+                    id=14,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_shoulder'),
+                15:
+                dict(
+                    name='right_elbow',
+                    id=15,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_elbow'),
+                16:
+                dict(
+                    name='right_wrist',
+                    id=16,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_wrist')
+            }),
+            skeleton_info=dict({
+                0:
+                dict(link=('root', 'left_hip'), id=0, color=[0, 255, 0]),
+                1:
+                dict(link=('left_hip', 'left_knee'), id=1, color=[0, 255, 0]),
+                2:
+                dict(link=('left_knee', 'left_foot'), id=2, color=[0, 255, 0]),
+                3:
+                dict(link=('root', 'right_hip'), id=3, color=[255, 128, 0]),
+                4:
+                dict(
+                    link=('right_hip', 'right_knee'),
+                    id=4,
+                    color=[255, 128, 0]),
+                5:
+                dict(
+                    link=('right_knee', 'right_foot'),
+                    id=5,
+                    color=[255, 128, 0]),
+                6:
+                dict(link=('root', 'spine'), id=6, color=[51, 153, 255]),
+                7:
+                dict(link=('spine', 'thorax'), id=7, color=[51, 153, 255]),
+                8:
+                dict(link=('thorax', 'neck_base'), id=8, color=[51, 153, 255]),
+                9:
+                dict(link=('neck_base', 'head'), id=9, color=[51, 153, 255]),
+                10:
+                dict(
+                    link=('thorax', 'left_shoulder'), id=10, color=[0, 255,
+                                                                    0]),
+                11:
+                dict(
+                    link=('left_shoulder', 'left_elbow'),
+                    id=11,
+                    color=[0, 255, 0]),
+                12:
+                dict(
+                    link=('left_elbow', 'left_wrist'),
+                    id=12,
+                    color=[0, 255, 0]),
+                13:
+                dict(
+                    link=('thorax', 'right_shoulder'),
+                    id=13,
+                    color=[255, 128, 0]),
+                14:
+                dict(
+                    link=('right_shoulder', 'right_elbow'),
+                    id=14,
+                    color=[255, 128, 0]),
+                15:
+                dict(
+                    link=('right_elbow', 'right_wrist'),
+                    id=15,
+                    color=[255, 128, 0])
+            }),
+            joint_weights=[
+                1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+                1.0, 1.0, 1.0, 1.0, 1.0
+            ],
+            sigmas=[],
+            stats_info=dict(bbox_center=(528.0, 427.0), bbox_scale=400.0))),
+    val=dict(
+        type='Body3DH36MDataset',
+        ann_file=
+        '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/fps50/h36m_test.npz',
+        img_prefix='/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/images/',
+        data_cfg=dict(
+            num_joints=17,
+            seq_len=81,
+            seq_frame_interval=1,
+            causal=False,
+            temporal_padding=True,
+            joint_2d_src='gt',
+            need_camera_param=True,
+            camera_param_file=
+            '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/cameras.pkl'
+        ),
+        pipeline=[
+            dict(
+                type='GetRootCenteredPose',
+                item='target',
+                visible_item='target_visible',
+                root_index=0,
+                root_name='root_position',
+                remove_root=False),
+            dict(type='ImageCoordinateNormalization', item='input_2d'),
+            dict(type='PoseSequenceToTensor', item='input_2d'),
+            dict(
+                type='Collect',
+                keys=[('input_2d', 'input'), 'target'],
+                meta_name='metas',
+                meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+        ],
+        dataset_info=dict(
+            dataset_name='h36m',
+            paper_info=dict(
+                author=
+                'Ionescu, Catalin and Papava, Dragos and Olaru, Vlad and Sminchisescu, Cristian',
+                title=
+                'Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments',
+                container=
+                'IEEE Transactions on Pattern Analysis and Machine Intelligence',
+                year='2014',
+                homepage='http://vision.imar.ro/human3.6m/description.php'),
+            keypoint_info=dict({
+                0:
+                dict(
+                    name='root',
+                    id=0,
+                    color=[51, 153, 255],
+                    type='lower',
+                    swap=''),
+                1:
+                dict(
+                    name='right_hip',
+                    id=1,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_hip'),
+                2:
+                dict(
+                    name='right_knee',
+                    id=2,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_knee'),
+                3:
+                dict(
+                    name='right_foot',
+                    id=3,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_foot'),
+                4:
+                dict(
+                    name='left_hip',
+                    id=4,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_hip'),
+                5:
+                dict(
+                    name='left_knee',
+                    id=5,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_knee'),
+                6:
+                dict(
+                    name='left_foot',
+                    id=6,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_foot'),
+                7:
+                dict(
+                    name='spine',
+                    id=7,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                8:
+                dict(
+                    name='thorax',
+                    id=8,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                9:
+                dict(
+                    name='neck_base',
+                    id=9,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                10:
+                dict(
+                    name='head',
+                    id=10,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                11:
+                dict(
+                    name='left_shoulder',
+                    id=11,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_shoulder'),
+                12:
+                dict(
+                    name='left_elbow',
+                    id=12,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_elbow'),
+                13:
+                dict(
+                    name='left_wrist',
+                    id=13,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_wrist'),
+                14:
+                dict(
+                    name='right_shoulder',
+                    id=14,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_shoulder'),
+                15:
+                dict(
+                    name='right_elbow',
+                    id=15,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_elbow'),
+                16:
+                dict(
+                    name='right_wrist',
+                    id=16,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_wrist')
+            }),
+            skeleton_info=dict({
+                0:
+                dict(link=('root', 'left_hip'), id=0, color=[0, 255, 0]),
+                1:
+                dict(link=('left_hip', 'left_knee'), id=1, color=[0, 255, 0]),
+                2:
+                dict(link=('left_knee', 'left_foot'), id=2, color=[0, 255, 0]),
+                3:
+                dict(link=('root', 'right_hip'), id=3, color=[255, 128, 0]),
+                4:
+                dict(
+                    link=('right_hip', 'right_knee'),
+                    id=4,
+                    color=[255, 128, 0]),
+                5:
+                dict(
+                    link=('right_knee', 'right_foot'),
+                    id=5,
+                    color=[255, 128, 0]),
+                6:
+                dict(link=('root', 'spine'), id=6, color=[51, 153, 255]),
+                7:
+                dict(link=('spine', 'thorax'), id=7, color=[51, 153, 255]),
+                8:
+                dict(link=('thorax', 'neck_base'), id=8, color=[51, 153, 255]),
+                9:
+                dict(link=('neck_base', 'head'), id=9, color=[51, 153, 255]),
+                10:
+                dict(
+                    link=('thorax', 'left_shoulder'), id=10, color=[0, 255,
+                                                                    0]),
+                11:
+                dict(
+                    link=('left_shoulder', 'left_elbow'),
+                    id=11,
+                    color=[0, 255, 0]),
+                12:
+                dict(
+                    link=('left_elbow', 'left_wrist'),
+                    id=12,
+                    color=[0, 255, 0]),
+                13:
+                dict(
+                    link=('thorax', 'right_shoulder'),
+                    id=13,
+                    color=[255, 128, 0]),
+                14:
+                dict(
+                    link=('right_shoulder', 'right_elbow'),
+                    id=14,
+                    color=[255, 128, 0]),
+                15:
+                dict(
+                    link=('right_elbow', 'right_wrist'),
+                    id=15,
+                    color=[255, 128, 0])
+            }),
+            joint_weights=[
+                1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+                1.0, 1.0, 1.0, 1.0, 1.0
+            ],
+            sigmas=[],
+            stats_info=dict(bbox_center=(528.0, 427.0), bbox_scale=400.0))),
+    test=dict(
+        type='Body3DH36MDataset',
+        ann_file=
+        '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/fps50/h36m_test.npz',
+        img_prefix='/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/images/',
+        data_cfg=dict(
+            num_joints=17,
+            seq_len=81,
+            seq_frame_interval=1,
+            causal=False,
+            temporal_padding=True,
+            joint_2d_src='gt',
+            need_camera_param=True,
+            camera_param_file=
+            '/media/star/zjurobot/402/WYH_402/mmpose/data/h36m/annotation_body3d/cameras.pkl'
+        ),
+        pipeline=[
+            dict(
+                type='GetRootCenteredPose',
+                item='target',
+                visible_item='target_visible',
+                root_index=0,
+                root_name='root_position',
+                remove_root=False),
+            dict(type='ImageCoordinateNormalization', item='input_2d'),
+            dict(type='PoseSequenceToTensor', item='input_2d'),
+            dict(
+                type='Collect',
+                keys=[('input_2d', 'input'), 'target'],
+                meta_name='metas',
+                meta_keys=['target_image_path', 'flip_pairs', 'root_position'])
+        ],
+        dataset_info=dict(
+            dataset_name='h36m',
+            paper_info=dict(
+                author=
+                'Ionescu, Catalin and Papava, Dragos and Olaru, Vlad and Sminchisescu, Cristian',
+                title=
+                'Human3.6M: Large Scale Datasets and Predictive Methods for 3D Human Sensing in Natural Environments',
+                container=
+                'IEEE Transactions on Pattern Analysis and Machine Intelligence',
+                year='2014',
+                homepage='http://vision.imar.ro/human3.6m/description.php'),
+            keypoint_info=dict({
+                0:
+                dict(
+                    name='root',
+                    id=0,
+                    color=[51, 153, 255],
+                    type='lower',
+                    swap=''),
+                1:
+                dict(
+                    name='right_hip',
+                    id=1,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_hip'),
+                2:
+                dict(
+                    name='right_knee',
+                    id=2,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_knee'),
+                3:
+                dict(
+                    name='right_foot',
+                    id=3,
+                    color=[255, 128, 0],
+                    type='lower',
+                    swap='left_foot'),
+                4:
+                dict(
+                    name='left_hip',
+                    id=4,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_hip'),
+                5:
+                dict(
+                    name='left_knee',
+                    id=5,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_knee'),
+                6:
+                dict(
+                    name='left_foot',
+                    id=6,
+                    color=[0, 255, 0],
+                    type='lower',
+                    swap='right_foot'),
+                7:
+                dict(
+                    name='spine',
+                    id=7,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                8:
+                dict(
+                    name='thorax',
+                    id=8,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                9:
+                dict(
+                    name='neck_base',
+                    id=9,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                10:
+                dict(
+                    name='head',
+                    id=10,
+                    color=[51, 153, 255],
+                    type='upper',
+                    swap=''),
+                11:
+                dict(
+                    name='left_shoulder',
+                    id=11,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_shoulder'),
+                12:
+                dict(
+                    name='left_elbow',
+                    id=12,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_elbow'),
+                13:
+                dict(
+                    name='left_wrist',
+                    id=13,
+                    color=[0, 255, 0],
+                    type='upper',
+                    swap='right_wrist'),
+                14:
+                dict(
+                    name='right_shoulder',
+                    id=14,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_shoulder'),
+                15:
+                dict(
+                    name='right_elbow',
+                    id=15,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_elbow'),
+                16:
+                dict(
+                    name='right_wrist',
+                    id=16,
+                    color=[255, 128, 0],
+                    type='upper',
+                    swap='left_wrist')
+            }),
+            skeleton_info=dict({
+                0:
+                dict(link=('root', 'left_hip'), id=0, color=[0, 255, 0]),
+                1:
+                dict(link=('left_hip', 'left_knee'), id=1, color=[0, 255, 0]),
+                2:
+                dict(link=('left_knee', 'left_foot'), id=2, color=[0, 255, 0]),
+                3:
+                dict(link=('root', 'right_hip'), id=3, color=[255, 128, 0]),
+                4:
+                dict(
+                    link=('right_hip', 'right_knee'),
+                    id=4,
+                    color=[255, 128, 0]),
+                5:
+                dict(
+                    link=('right_knee', 'right_foot'),
+                    id=5,
+                    color=[255, 128, 0]),
+                6:
+                dict(link=('root', 'spine'), id=6, color=[51, 153, 255]),
+                7:
+                dict(link=('spine', 'thorax'), id=7, color=[51, 153, 255]),
+                8:
+                dict(link=('thorax', 'neck_base'), id=8, color=[51, 153, 255]),
+                9:
+                dict(link=('neck_base', 'head'), id=9, color=[51, 153, 255]),
+                10:
+                dict(
+                    link=('thorax', 'left_shoulder'), id=10, color=[0, 255,
+                                                                    0]),
+                11:
+                dict(
+                    link=('left_shoulder', 'left_elbow'),
+                    id=11,
+                    color=[0, 255, 0]),
+                12:
+                dict(
+                    link=('left_elbow', 'left_wrist'),
+                    id=12,
+                    color=[0, 255, 0]),
+                13:
+                dict(
+                    link=('thorax', 'right_shoulder'),
+                    id=13,
+                    color=[255, 128, 0]),
+                14:
+                dict(
+                    link=('right_shoulder', 'right_elbow'),
+                    id=14,
+                    color=[255, 128, 0]),
+                15:
+                dict(
+                    link=('right_elbow', 'right_wrist'),
+                    id=15,
+                    color=[255, 128, 0])
+            }),
+            joint_weights=[
+                1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+                1.0, 1.0, 1.0, 1.0, 1.0
+            ],
+            sigmas=[],
+            stats_info=dict(bbox_center=(528.0, 427.0), bbox_scale=400.0))))
+work_dir = 'checkpoints/20221014DEBUG'
+gpu_ids = [0]
+
+2022-10-14 16:31:01,688 - mmpose - INFO - Set random seed to 928700067, deterministic: False
+2022-10-14 16:36:06,820 - mmpose - INFO - Start running, host: star@star-SYS-4029GP-TRT, work_dir: /media/star/zjurobot/402/WYH_402/mmpose/tools/checkpoints/20221014DEBUG
+2022-10-14 16:36:06,822 - mmpose - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) ExpLrUpdaterHook                   
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) ExpLrUpdaterHook                   
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) ExpLrUpdaterHook                   
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(NORMAL      ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_val_epoch:
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+after_run:
+(VERY_LOW    ) TextLoggerHook                     
+(VERY_LOW    ) TensorboardLoggerHook              
+ -------------------- 
+2022-10-14 16:36:06,823 - mmpose - INFO - workflow: [('train', 1)], max: 160 epochs
+2022-10-14 16:36:06,823 - mmpose - INFO - Checkpoints will be saved to /media/star/zjurobot/402/WYH_402/mmpose/tools/checkpoints/20221014DEBUG by HardDiskBackend.
